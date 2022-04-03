@@ -9,18 +9,32 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "recursos")
 public class Recurso {
     @Id
-    private String id = UUID.randomUUID().toString();
+    private String id = UUID.randomUUID().toString().substring(0,6);
 
-    private String fechaSalida;
+    private String fechaPrestacion;
     private boolean estaPrestado;
     private String titulo;
     private String tipo;
-    
-    public Recurso(String fechaSalida, String titulo, String tipo){
-        this.fechaSalida = Objects.requireNonNull(fechaSalida);
+    private String areaTematica;
+
+    public Recurso(String fechaPrestacion, String titulo, String tipo,String areaTematica){
+        this.fechaPrestacion = Objects.requireNonNull(fechaPrestacion);
         this.titulo = Objects.requireNonNull(titulo);
         this.tipo = Objects.requireNonNull(tipo);
         this.setEstaPrestado(false);
+        this.areaTematica=Objects.requireNonNull(areaTematica);
+    }
+
+    
+    public Recurso(){
+    
+    }
+    public String getAreaTematica() {
+        return areaTematica;
+    }
+
+    public void setAreaTematica(String areaTematica) {
+        this.areaTematica = areaTematica;
     }
 
     public boolean isEstaPrestado() {
@@ -39,8 +53,8 @@ public class Recurso {
         this.id = id;
     }
 
-    public String getFechaSalida() {
-        return fechaSalida;
+    public String getfechaPrestacion() {
+        return fechaPrestacion;
     }
 
 
@@ -50,8 +64,8 @@ public class Recurso {
 
     
 
-    public void setFechaSalida(String fechaSalida) {
-        this.fechaSalida = fechaSalida;
+    public void setfechaPrestacion(String fechaPrestacion) {
+        this.fechaPrestacion = fechaPrestacion;
     }
 
     public void setTipo(String tipo) {
